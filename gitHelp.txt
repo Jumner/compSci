@@ -1,0 +1,10 @@
+update local git
+git clean -f -d
+f=force, d=recursive
+
+force head to latest commit
+git reset --head origin/main
+
+git push updates github with local git
+git pull updates local git with github
+if pull doesn't work use fetch and clean
