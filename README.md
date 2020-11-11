@@ -2,7 +2,7 @@
 #### This is a repo for my computer science work
 
 ---
-### Each project will be in a folder corisponding to the language it was made in
+### Each project will be in a folder corresponding to the language it was made in
 The languages that I currently have folders for:
 - C++ 🥳🤩
 - I will probably have to use python though 😬🙄
