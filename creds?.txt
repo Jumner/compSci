@@ -1,1 +1,1 @@
-this was just because it says me email is "="
+There were two emails in the .git/config file 🤕
