@@ -1,1 +1,0 @@
-There were two emails in the .git/config file 🤕
