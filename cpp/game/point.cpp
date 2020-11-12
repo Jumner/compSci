@@ -10,11 +10,9 @@ point::point(
 ): x(initX), y(initY), z(initZ) {
 	//point constructor
 
-	std::cout << "Point constructed" << std::endl;
 }
 
 point::~point() {
 	//point destructor
 	
-	std::cout << "Point destructed :)" << std::endl;
 }
