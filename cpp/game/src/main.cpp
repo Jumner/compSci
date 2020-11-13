@@ -5,6 +5,7 @@
 #include "tri.hpp"
 #include "vec.hpp"
 #include "mesh.hpp"
+#include "prim.hpp"
 
 int main() {
   std::cout << "Starting..." << std::endl << std::endl;
@@ -14,9 +15,9 @@ int main() {
     point(2,2,2)
   );
 
-  std::vector<tri> testList = {testTri, testTri};
+  std::vector<tri> triList = prim::unitCube();
 
-  mesh testMesh(testList);
+  mesh testMesh(triList);
   testMesh.fromTriList();
 
   testMesh.printVertInd();
