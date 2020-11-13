@@ -15,7 +15,7 @@ int main() {
     point(2,2,2)
   );
 
-  std::vector<tri> triList = prim::unitCube();
+  std::vector<tri> triList = prim::rect(10,1,5);
 
   mesh testMesh(triList);
   testMesh.fromTriList();
