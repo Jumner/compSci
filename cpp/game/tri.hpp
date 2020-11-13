@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "point.hpp"
 #include "vec.hpp"
 //tri.hpp
@@ -8,7 +10,7 @@ class tri { // Triangle class :)
 	
 	public:
 
-		point a, b, c; //three points of tri
+		std::vector<point> points;
 
 		vec normal;
 
@@ -17,6 +19,8 @@ class tri { // Triangle class :)
 			point initB,
 			point initC
 		);
+
+		tri(std::vector<point> pointList);
 
 		// Tri constructor
 		~tri();

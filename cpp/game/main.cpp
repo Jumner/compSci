@@ -1,7 +1,10 @@
 #include <iostream>
+#include <vector>
 
 #include "point.hpp"
 #include "tri.hpp"
+#include "vec.hpp"
+#include "mesh.hpp"
 
 int main() {
   std::cout << "Starting..." << std::endl << std::endl;
@@ -10,5 +13,12 @@ int main() {
     point(1,1,1),
     point(2,2,2)
   );
-  std::cout << testTri.c.x << std::endl;
+
+  std::vector<tri> testList = {testTri, testTri};
+
+  mesh testMesh(testList);
+  testMesh.fromTriList();
+
+  testMesh.printVertInd();
+  // std::cout << testMesh.verticies[0]. << std::endl;
 }

@@ -16,3 +16,8 @@ point::~point() {
 	//point destructor
 	
 }
+
+bool point::operator==(point& obj) {
+	// operator overflow for == to tell if points are the same			
+	return this->x == obj.x && this->y == obj.y && this->z == obj.z;
+}

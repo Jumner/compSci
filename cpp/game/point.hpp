@@ -14,4 +14,6 @@ class point { // Point for tryangle
 		);
 		
 		~point(); // Point destructor
+
+		bool operator==(point& obj);
 };

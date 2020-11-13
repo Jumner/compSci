@@ -6,7 +6,7 @@
 //vec.cpp
 
 vec::vec() { // Default 3d vector constructor
-	std::cout << "Vec init" << std::endl;
+
 }
 
 vec::vec( // 3d Vector constructor
@@ -14,13 +14,15 @@ vec::vec( // 3d Vector constructor
 	double initY,
 	double initZ
 ) {
-	std::cout << "Vec constructed" << std::endl;
+	
+
+
 }
 
 vec::~vec() {
 	// 3d Vector destructor
 
-	std::cout << "Vec destructed :)" << std::endl; 
+
 }
 
 double vec::getMag() {

@@ -1,16 +1,24 @@
 #include <iostream>
+#include <vector>
 
 #include "tri.hpp"
 #include "point.hpp"
 
-tri::tri( // Tri constructor
+tri::tri(
 	point initA,
 	point initB,
 	point initC
-): a(initA), b(initB), c(initC) {
-	std::cout << "Tri constructed" << std::endl;
+) {
+	// Tri point constructor
+	points.push_back(initA);
+	points.push_back(initB);
+	points.push_back(initC);
 }
 
+tri::tri(std::vector<point> pointList): points(pointList) {
+	// Tri vector constructor
+} 
+
 tri::~tri() {
-	std::cout << "Tri destructed :)" << std::endl;
+	// Tri destructor
 }
