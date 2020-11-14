@@ -39,7 +39,6 @@ void mesh::fromTriList() {
 
 	std::cout << "Convert mesh from tri list" << std::endl;
 
-	int index;
 	bool found;
 	verticies.clear(); //empty verticies
 	indicies.clear(); //empty indicies
@@ -72,7 +71,8 @@ void mesh::fromTriList() {
 
 }
 
-void mesh::printVertInd() { //print the verts and the inds in a nice way
+void mesh::printVertInd() { 
+	//print the verticies and the indicies in a nice way
 	std::cout << std::endl << "Mesh: Print verticies" << std::endl;
 
 	for(point _vert: verticies) {
