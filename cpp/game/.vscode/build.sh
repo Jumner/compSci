@@ -8,11 +8,11 @@ echo compiling
 #compiler options
 
 CFLAGS="-g -Wall"
-LSDL2FLAGS="-lSDL2 -lGL -lGLEW"
+LSDL2FLAGS="-lSDL2"
 
 INCDIR="include"
 SRCDIR="src"
 
 OUTPUT="main"
 
-g++ $CFLAGS $LSDL2FLAGS $SRCDIR/*.cpp -I $INCDIR -o $OUTPUT
+g++ -o $OUTPUT -I $INCDIR src/*.cpp $LSDL2FLAGS $CFLAGS
