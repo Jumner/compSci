@@ -9,13 +9,8 @@
 
 int main() {
   std::cout << "Starting..." << std::endl << std::endl;
-  tri testTri(
-    point(0,0,0),
-    point(1,1,1),
-    point(2,2,2)
-  );
 
-  std::vector<tri> triList = prim::rect(10,1,5);
+  std::vector<tri> triList = prim::unitCube();
 
   mesh testMesh(triList);
   testMesh.fromTriList();
