@@ -14,3 +14,5 @@ struct sdlInitReturn {
 void sdlCleanup(SDL_Window* window, SDL_Surface* surface);
 
 sdlInitReturn sdlInit(const char* windowName, int width, int height);
+
+void displayBuffer(SDL_Window* window, SDL_Surface* surface, SDL_Surface* surfaceData, uint32_t pixelData[]);

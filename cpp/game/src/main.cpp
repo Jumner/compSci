@@ -3,14 +3,7 @@
 #include <string>
 
 // #include <GL/glew.h>
-#include <SDL2/SDL.h>
-#include "sdlFunc.hpp"
-
-#include "point.hpp"
-#include "tri.hpp"
-#include "vec.hpp"
-#include "mesh.hpp"
-#include "prim.hpp"
+#include "includeAll.hpp" //includes all the hpp files
 
 //window size
 #define WIDTH 640
@@ -20,14 +13,14 @@ int main() {
   sdlInitReturn sdlReturn = sdlInit("Hey it works!", WIDTH, HEIGHT);
 
 	if(sdlReturn.success != 0) { //something went wrong :(
-		return 0;
+		return 0; //quit to investigate error
 	}
 
 	SDL_Window* window = sdlReturn.window;
 	SDL_Surface* surface = sdlReturn.surface;
 	SDL_Surface* surfaceData = sdlReturn.surfaceData;
 
-	uint32_t pixelData[WIDTH*HEIGHT];
+	uint32_t pixelData[WIDTH*HEIGHT]; //array of pixels
 
 	std::cout << "Starting game loop" << std::endl;
 
@@ -50,16 +43,8 @@ int main() {
 			pixel = 0x000000FF + (r<<24) + (g<<16) + (b<<8);
 			//bitshift just moves them over by a certain amount
 		}
-
-		SDL_LockSurface(surfaceData);
-
-		surfaceData->pixels = pixelData;
-
-		SDL_UnlockSurface(surfaceData);
-
-		SDL_UpperBlit(surfaceData, nullptr, surface, nullptr);
-
-		SDL_UpdateWindowSurface(window);
+		
+		displayBuffer(window, surface, surfaceData, pixelData);
 
 		frameCount++;
 
@@ -74,5 +59,4 @@ int main() {
 
   testMesh.printVertInd();
   return 0;
-  // std::cout << testMesh.verticies[0]. << std::endl;
 }
