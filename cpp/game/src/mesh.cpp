@@ -10,6 +10,7 @@
 
 mesh::mesh() { 
 	// Default constructor
+	verticies = {}; //known state
 	std::cout << "Mesh init" << std::endl;
 }
 
@@ -38,6 +39,12 @@ void mesh::fromTriList() {
 	//create verticy and indicy lists from tri list
 
 	std::cout << "Convert mesh from tri list" << std::endl;
+
+	if(triList.size() == 0) {
+		// if there is stuff in trilist
+		// without this check data could be deleted
+		return;
+	}
 
 	bool found;
 	verticies.clear(); //empty verticies

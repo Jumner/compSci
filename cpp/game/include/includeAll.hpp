@@ -8,3 +8,4 @@
 #include "vec.hpp"
 #include "mesh.hpp"
 #include "prim.hpp"
+#include "scene.hpp"

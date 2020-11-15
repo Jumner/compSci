@@ -52,11 +52,12 @@ int main() {
 
 	sdlCleanup(window, surface);
 
-  std::vector<tri> triList = prim::unitCube();
 
-  mesh testMesh(triList);
-  testMesh.fromTriList();
 
-  testMesh.printVertInd();
+	scene myScene;
+	myScene.addMesh(&mesh(prim::unitCube()));
+
+	myScene.init(); // Just prints init rn
+
   return 0;
 }
