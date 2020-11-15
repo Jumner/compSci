@@ -55,11 +55,10 @@ void mesh::fromTriList() {
 
 					indicies.push_back(i); //add index of point to indicies
 
-					goto afterFor;
+					break;
 				}
 
 			}
-			afterFor:
 			
 			if(!found) { //current point ! in verticies
 				verticies.push_back(triPoint);
