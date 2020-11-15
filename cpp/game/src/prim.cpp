@@ -52,24 +52,24 @@ std::vector<tri> prim::unitCube() {
 std::vector<tri> prim::cube(double size) {
   double hSize = size/2;
   std::vector<tri> triList = {
-    //front face
-    tri(point(-hSize, -hSize, hSize), point(hSize, -hSize, -hSize), point(-hSize, -hSize, -hSize)),
-    tri(point(-hSize, -hSize, hSize), point(hSize, -hSize, hSize), point(hSize, -hSize, -hSize)),
+    //front face wrong
+    tri(point(-hSize, -hSize, -hSize), point(-hSize, hSize, -hSize), point(hSize, hSize, -hSize)),
+    tri(point(-hSize, -hSize, -hSize), point(hSize, hSize, -hSize), point(hSize, -hSize, -hSize)),
     //back face
-    tri(point(-hSize, hSize, hSize), point(hSize, hSize, -hSize), point(-hSize, hSize, -hSize)),
-    tri(point(-hSize, hSize, hSize), point(hSize, hSize, hSize), point(hSize, hSize, -hSize)),
+    tri(point(hSize, -hSize, -hSize), point(hSize, hSize, -hSize), point(hSize, hSize, hSize)),
+    tri(point(hSize, -hSize, -hSize), point(hSize, hSize, hSize), point(hSize, -hSize, hSize)),
     //right face
-    tri(point(-hSize, hSize, hSize), point(-hSize, -hSize, hSize), point(-hSize, -hSize, -hSize)),
-    tri(point(-hSize, hSize, hSize), point(-hSize, -hSize, -hSize), point(-hSize, hSize, -hSize)),
+    tri(point(hSize, -hSize, hSize), point(hSize, hSize, hSize), point(-hSize, hSize, hSize)),
+    tri(point(hSize, -hSize, hSize), point(-hSize, hSize, hSize), point(-hSize, -hSize, hSize)),
     //left face
-    tri(point(hSize, hSize, hSize), point(hSize, -hSize, hSize), point(hSize, -hSize, -hSize)),
-    tri(point(hSize, hSize, hSize), point(hSize, -hSize, -hSize), point(hSize, hSize, -hSize)),
+    tri(point(-hSize, -hSize, hSize), point(-hSize, hSize, hSize), point(-hSize, hSize, -hSize)),
+    tri(point(-hSize, -hSize, hSize), point(-hSize, hSize, -hSize), point(-hSize, -hSize, -hSize)),
     //top face
-    tri(point(-hSize, hSize, hSize), point(hSize, hSize, hSize), point(hSize, -hSize, hSize)),
-    tri(point(-hSize, hSize, hSize), point(hSize, -hSize, hSize), point(-hSize, -hSize, hSize)),
+    tri(point(-hSize, hSize, -hSize), point(-hSize, hSize, hSize), point(hSize, -hSize, hSize)),
+    tri(point(-hSize, hSize, -hSize), point(hSize, hSize, hSize), point(hSize, hSize, -hSize)),
     //bottom face
-    tri(point(-hSize, hSize, -hSize), point(hSize, hSize, -hSize), point(hSize, -hSize, -hSize)),
-    tri(point(-hSize, hSize, -hSize), point(hSize, -hSize, -hSize), point(-hSize, -hSize, -hSize))
+    tri(point(hSize, -hSize, hSize), point(-hSize, hSize, -hSize), point(-hSize, -hSize, -hSize)),
+    tri(point(hSize, -hSize, hSize), point(-hSize, -hSize, -hSize), point(hSize, -hSize, -hSize))
   };
 
   return triList;

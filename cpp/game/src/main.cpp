@@ -6,10 +6,27 @@
 #include "includeAll.hpp" //includes all the hpp files
 
 //window size
-#define WIDTH 640
-#define HEIGHT 480
+#define WIDTH 800
+#define HEIGHT 400
 
 int main() {
+
+	scene myScene; //create scene
+	myScene.init(60, WIDTH, HEIGHT); // 60 fov setup scene
+
+	mesh cubeMesh = mesh(prim::unitCube()); //create cube mesh
+
+	myScene.addMesh(cubeMesh); //add mesh to scene
+
+
+	myScene.meshList[0].move(0, 0, 2);
+	
+	myScene.meshList[0].printVertInd();
+
+	myScene.project(); //maybe im in luck? project scene geometry
+
+	myScene.meshList[0].printVertInd(); //print data
+
   sdlInitReturn sdlReturn = sdlInit("Hey it works!", WIDTH, HEIGHT);
 
 	if(sdlReturn.success != 0) { //something went wrong :(
@@ -44,26 +61,20 @@ int main() {
 			pixel = 0x000000FF + (r<<24) + (g<<16) + (b<<8);
 			//bitshift just moves them over by a certain amount
 		}
+		for(point point: myScene.meshList[0].verticies) {
+			if(point.projected.x > 0 && point.projected.x < WIDTH && point.projected.y > 0 && point.projected.y < HEIGHT) {
+				pixelData[(int)(floor(point.projected.y)*WIDTH+floor(point.projected.x))] = 0x000000FF; //make points black
+			}
+		}
 		
 		displayBuffer(window, surface, surfaceData, pixelData);
 
 		frameCount++;
+		// gameLoop = false; //dont bother rendering
 
 	}
 
 	sdlCleanup(window, surface);
-
-
-
-	scene myScene;
-	myScene.init(60, WIDTH, HEIGHT); // 60 fov
-
-	mesh cubeMesh = mesh(prim::unitCube());
-
-	myScene.addMesh(cubeMesh);
-
-	myScene.project(); //maybe im in luck?
-
 
   return 0;
 }

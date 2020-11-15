@@ -85,6 +85,8 @@ void mesh::printVertInd() {
 		std::cout << "( " << _vert.x << ", ";
 		std::cout << _vert.y << ", ";
 		std::cout << _vert.z << " ),";
+		std::cout << "( " << _vert.projected.x << ",";
+		std::cout << _vert.projected.y << " ),";
     std::cout << std::endl;
 	}
 
@@ -98,4 +100,14 @@ void mesh::printVertInd() {
 		std::cout << std::endl;
 
   }
+}
+
+void mesh::move(double x, double y, double z) {
+	//translate mesh
+	for(point& _point: verticies) {
+		//for every point in the mesh
+		_point.x += x;
+		_point.y += y;
+		_point.z += z; //move the point
+	}
 }

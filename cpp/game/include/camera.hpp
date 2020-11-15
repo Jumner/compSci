@@ -13,6 +13,7 @@ class camera {
 	int fov; // fov of the camera
 	double f; // Used for projection = 1/tan(fov/2)
 	double aspectRatio; // w/h
+	int width, height;
 	int zFar;
 	int zNear;
 	int q; // Used for projection of z
