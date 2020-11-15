@@ -1,8 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 // #include <GL/glew.h>
 #include <SDL2/SDL.h>
+#include "sdlFunc.hpp"
 
 #include "point.hpp"
 #include "tri.hpp"
@@ -15,49 +17,24 @@
 #define HEIGHT 480
 
 int main() {
-  std::cout << "Starting..." << std::endl << std::endl;
+  sdlInitReturn sdlReturn = sdlInit("Hey it works!", WIDTH, HEIGHT);
 
-	if(SDL_Init(SDL_INIT_VIDEO) != 0) { //sdl init failed
-		std::cout << "Error in sdl init: " << SDL_GetError() << std::endl;
-		return -1; 
+	if(sdlReturn.success != 0) { //something went wrong :(
+		return 0;
 	}
 
-	SDL_Window* window = SDL_CreateWindow("Test game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
-	if(!window) { //window failed
-		std::cout << "Window creation failed: " << SDL_GetError() << std::endl;
-		return -1;
-	}
-	std::cout << "Window created" << std::endl;
-
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if(!renderer) { //renderer failed
-		std::cout << "Renderer creation failed: " << SDL_GetError() << std::endl;
-		return -1;
-	}
-	std::cout << "Renderer created" << std::endl;
-
-	
-
-	// SDL_Surface* surface = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF);
-	SDL_Surface* surface = SDL_GetWindowSurface(window);
-	SDL_Surface* surfaceData = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF);
-	if(!surface) { //surface failed
-		std::cout << "Surface creation failed: " << SDL_GetError() << std::endl;
-		return -1;
-	}
+	SDL_Window* window = sdlReturn.window;
+	SDL_Surface* surface = sdlReturn.surface;
+	SDL_Surface* surfaceData = sdlReturn.surfaceData;
 
 	uint32_t pixelData[WIDTH*HEIGHT];
-
-	// SDL_Delay(1000); //for some reason this is needed
 
 	std::cout << "Starting game loop" << std::endl;
 
 	SDL_Event quitEvent;
 	bool gameLoop = true;
 	unsigned long frameCount = 0; 
-	int g, b;
-	bool gMode = true;
-	bool bMode = true;
+	int r, g, b;
 	while(gameLoop) {
 		if(SDL_PollEvent(&quitEvent)) {
 			if(quitEvent.type==SDL_QUIT) {
@@ -65,29 +42,14 @@ int main() {
 				break;
 			}
 		}
-		if(gMode) {
-			g = (int) (frameCount/3)%255;
-		} else {
-			g = 255 - (int) (frameCount/3)%255;
-		}
-		if(bMode) {
-			b = (int) (frameCount/7)%255;
-		} else {
-			b = 255 - (int)(frameCount/7)%255;
-		}
-		if(g>=255 || g<=0) {
-			gMode = !gMode;
-		}
-		if(b>=255 || b<=0) {
-			bMode = !bMode;
-		}
-			
-		
+		r = (int) frameCount%256;
+		g = (int) (frameCount/3)%256;
+		b = (int) (frameCount/7)%256;
 
 		for(uint32_t& pixel: pixelData) {
-			pixel = 0xFF0000FF + g*65536 + b*256;
-			//make all pixels orange :)
-		}		
+			pixel = 0x000000FF + (r<<24) + (g<<16) + (b<<8);
+			//bitshift just moves them over by a certain amount
+		}
 
 		SDL_LockSurface(surfaceData);
 
@@ -103,10 +65,7 @@ int main() {
 
 	}
 
-	SDL_DestroyRenderer(renderer);
-	SDL_FreeSurface(surface);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+	sdlCleanup(window, surface);
 
   std::vector<tri> triList = prim::unitCube();
 
