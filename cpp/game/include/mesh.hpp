@@ -13,6 +13,7 @@ class mesh { //contains mesh data
 
 		std::vector<tri> triList; //send mesh tryangles here
 
+		std::vector<point2d> projected;
 		std::vector<point> verticies;
 		std::vector<int> indicies;
 

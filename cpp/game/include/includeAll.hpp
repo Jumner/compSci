@@ -9,3 +9,4 @@
 #include "mesh.hpp"
 #include "prim.hpp"
 #include "scene.hpp"
+#include "camera.hpp"
