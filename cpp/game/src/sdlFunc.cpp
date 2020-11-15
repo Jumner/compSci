@@ -53,6 +53,8 @@ sdlInitReturn sdlInit(const char* windowName, int width, int height) {
 		result.success = -4;
 		return result;
 	}
+
+	return result;
 }
 
 void displayBuffer(SDL_Window* window, SDL_Surface* surface, SDL_Surface* surfaceData, uint32_t pixelData[]) {

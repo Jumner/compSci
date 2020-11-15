@@ -55,7 +55,7 @@ void mesh::fromTriList() {
 		
 			found = false;
 
-			for(int i = 0; i < verticies.size(); i ++) { // every point
+			for(unsigned long i = 0; i < verticies.size(); i ++) { // every point
 		
 				if(triPoint == verticies[i]) { //current point is in verticies
 					found = true;
@@ -90,7 +90,7 @@ void mesh::printVertInd() {
 
 	std::cout << std::endl << "Mesh: Print indicies" << std::endl;
 
-	for(int i = 0; i < indicies.size(); i += 3) {
+	for(unsigned long i = 0; i < indicies.size(); i += 3) {
 	
     std::cout << "( " << indicies[i] << ", ";
     std::cout << indicies[i+1] << ", ";

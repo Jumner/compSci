@@ -27,7 +27,7 @@ int main() {
 	SDL_Event quitEvent;
 	bool gameLoop = true;
 	unsigned long frameCount = 0; 
-	int r, g, b;
+	unsigned char r,g,b; //in g++ char is unsigned ???
 	while(gameLoop) {
 		if(SDL_PollEvent(&quitEvent)) {
 			if(quitEvent.type==SDL_QUIT) {
@@ -35,9 +35,10 @@ int main() {
 				break;
 			}
 		}
-		r = (int) frameCount%256;
-		g = (int) (frameCount/3)%256;
-		b = (int) (frameCount/7)%256;
+		
+		r = 0xFF;
+		g = 0x50;
+		b = 0x00;
 
 		for(uint32_t& pixel: pixelData) {
 			pixel = 0x000000FF + (r<<24) + (g<<16) + (b<<8);
@@ -55,9 +56,14 @@ int main() {
 
 
 	scene myScene;
-	myScene.addMesh(&mesh(prim::unitCube()));
+	myScene.init(60, WIDTH, HEIGHT); // 60 fov
 
-	myScene.init(); // Just prints init rn
+	mesh cubeMesh = mesh(prim::unitCube());
+
+	myScene.addMesh(cubeMesh);
+
+	myScene.project(); //maybe im in luck?
+
 
   return 0;
 }

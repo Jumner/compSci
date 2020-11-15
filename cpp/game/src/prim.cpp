@@ -104,5 +104,5 @@ std::vector<tri> prim::rect(double x, double y, double z) { //makes rectangle
 }
 
 std::vector<tri> prim::rect(std::vector<double> size) {
-  prim::rect(size[0], size[1], size[2]);
+  return prim::rect(size[0], size[1], size[2]); 
 }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 
 #include "scene.hpp"
 #include "mesh.hpp"
@@ -15,18 +16,11 @@ camera::~camera() {
 	std::cout << "Camera destructed" << std::endl;
 }
 
-void camera::init() {
+void camera::init(int _fov, int width, int height) {
 	//setup camera stuff
-	//fov = 2342 stuff like that
-}
-
-void camera::project(scene& _scene) { 
-	// project a scene
-	std::cout << "Scene project" << std::endl;
-	for(mesh& _mesh: _scene.meshList) {
-		// Every mesh in the scene
-		project(_mesh); //project that mesh
-	}
+	aspectRatio = width/height; // set camera aspect ratio
+	fov = _fov; // Set camera fov
+	f = 1/tan(fov/2); //set f property
 }
 
 void camera::project(mesh& _mesh) { 
@@ -41,5 +35,8 @@ void camera::project(mesh& _mesh) {
 void camera::project(point& _point) { 
 	// project a point
 	std::cout << "Point project" << std::endl;
+	_point.projected.x = (aspectRatio * f * _point.x)/_point.z; // Projected x coord
+	_point.projected.y = (f * _point.y)/_point.z; // Projected y coord
+	_point.projected.z = 0; // I'll add this later when I need it
 	//now for the meat :)
 }

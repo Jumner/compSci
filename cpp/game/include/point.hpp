@@ -1,17 +1,18 @@
 #pragma once
 //point.hpp
 
-struct point2d {
+struct point3d {
 	double x;
 	double y;
+	double z;
 };
 
-class point { // Point for tryangle
+class point { // Point used in triangles
 
   public:
     
 		double x,y,z; // Position of this point
-		point2d projected;
+		point3d projected; //projected location of this point
 		
 		point( // Point constructor
 			double initX,
