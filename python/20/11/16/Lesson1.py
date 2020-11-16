@@ -1,10 +1,10 @@
+name = input("Enter your name")
+print(f'{name} here, this is my first program\n\n')
+# Newline char to create space after the print statement
+print(f'Hello {name}')
 print("Hello World")
 # print(Hello World) # Gets error "SyntaxError: invalid syntax"
-name = input("Enter your name")
-print(f'Hello {name}')
-print("This is my first program\n\n")
 print(1,000,000)  # Prints 1 0 0
-# To create space after the print statement
 # print(1 2) # Gets error "SyntaxError: invalid syntax"
 # print(n = 7) # Gets error "TypeError: 'n' is an invalid keyword argument for print()"
 print(7+5)
@@ -27,7 +27,20 @@ print(10 % 3)  # The remainder after 10/3
 # You can use // to get the floor and % to get the remainder
 
 # Lesson 1 Homework
-#  |
-#  |
-# __
-# (D)
+# # 01234 segment number
+# 1 00100 
+# 2 10111 
+# 3 10110 
+# 4 01110 
+# 5 11010 
+# 6 11011 
+# 7 10100 
+# 8 11111 
+# 9 11110 
+# 0 11101 
+
+# Conclusion two can safely be removed
+# Brute force method
+# Each number can be represented as a byte which stores if each of the seven segments are on or off
+# then starting at the first bit, set the first bit of every bite to 0 check if any of them are the same
+# if two are the same, add one to a counter char and revert that bit. and move to the next bit
