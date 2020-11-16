@@ -1,28 +1,10 @@
-# parking lot problem
-
-# begh were all empty
-# answer is (B) 4
-# apple packing
-
-# looseApples = 275%8
-
-# print(looseApples) #apples
-# print((275//8)%8)
-# print(((275//8)//8))
-
-# (B) 4 boxes 2 bags 3 apples
-
-# Intrusion
-
-# (B) 10:13
-
 print("Hello World")
 # print(Hello World) # Gets error "SyntaxError: invalid syntax"
-# name = input("Enter your name")
-# print(f'Hello {name}')
-# To create space after the print statement
+name = input("Enter your name")
+print(f'Hello {name}')
 print("This is my first program\n\n")
 print(1,000,000)  # Prints 1 0 0
+# To create space after the print statement
 # print(1 2) # Gets error "SyntaxError: invalid syntax"
 # print(n = 7) # Gets error "TypeError: 'n' is an invalid keyword argument for print()"
 print(7+5)
@@ -43,3 +25,9 @@ print(10/3)  # The decimal result of 10 divided by 3
 print(10//3)  # The result of 10/3 floored
 print(10 % 3)  # The remainder after 10/3
 # You can use // to get the floor and % to get the remainder
+
+# Lesson 1 Homework
+#  |
+#  |
+# __
+# (D)
