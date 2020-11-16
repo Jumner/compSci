@@ -7,30 +7,28 @@
 
 //mesh.hpp
 
-class mesh { //contains mesh data
+class mesh // Contains mesh data
+{ 
 
-	public:
+public:
+	std::vector<tri> triList; // Send mesh tryangles here
 
-		std::vector<tri> triList; //send mesh tryangles here
+	std::vector<point> verticies;
+	std::vector<int> indicies;
 
-		std::vector<point> verticies;
-		std::vector<int> indicies;
+	mesh();
 
-		mesh();
+	mesh(std::vector<tri> new_triList);
 
-		mesh(std::vector<tri> new_triList);
-
-		mesh(
+	mesh(
 			std::vector<point> new_verticies,
-			std::vector<int> new_indicies
-		);
+			std::vector<int> new_indicies);
 
-		~mesh();
+	~mesh();
 
-		void fromTriList();
+	void fromTriList();
 
-		void printVertInd();
+	void printVertInd();
 
-		void move(double x, double y, double z);
-
+	void move(double x, double y, double z);
 };

@@ -4,20 +4,20 @@
 //point.cpp
 
 point::point(
-	double initX,
-	double initY,
-	double initZ
-): x(initX), y(initY), z(initZ) {
+		double initX,
+		double initY,
+		double initZ) : x(initX), y(initY), z(initZ)
+{
 	//point constructor
-
 }
 
-point::~point() {
+point::~point()
+{
 	//point destructor
-	
 }
 
-bool point::operator==(point& obj) {
-	// operator overflow for == to tell if points are the same			
-	return this->x == obj.x && this->y == obj.y && this->z == obj.z;
+bool point::operator==(point &obj)
+{
+	// operator overflow for == to tell if points are the same
+	return x == obj.x && y == obj.y && z == obj.z;
 }

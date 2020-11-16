@@ -6,22 +6,21 @@
 #include "vec.hpp"
 //tri.hpp
 
-class tri { // Triangle class :)
-	
-	public:
+class tri // Triangle class :)
+{
 
-		std::vector<point> points;
+public:
+	std::vector<point> points;
 
-		vec normal;
+	vec normal;
 
-		tri( // Tri constructor
+	tri( // Tri constructor
 			point initA,
 			point initB,
-			point initC
-		);
+			point initC);
 
-		tri(std::vector<point> pointList);
+	tri(std::vector<point> pointList);
 
-		// Tri constructor
-		~tri();
+	// Tri constructor
+	~tri();
 };

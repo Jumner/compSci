@@ -2,24 +2,24 @@
 
 //vec.hpp
 
-class vec { //3d vector class
+class vec // 3d vector class
+{ 
 
 	double mag;
 
-	public:
-		double x,y,z;
+public:
+	double x, y, z;
 
-		vec();
+	vec();
 
-		vec(
+	vec(
 			double initX,
 			double initY,
-			double initZ
-		);
+			double initZ);
 
-		~vec();
+	~vec();
 
-		double getMag();
+	double getMag();
 
-		vec getNormal();
+	vec getNormal();
 };
