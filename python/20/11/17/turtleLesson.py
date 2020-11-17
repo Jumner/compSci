@@ -1,0 +1,36 @@
+import turtle
+#set up the world
+world = turtle.Screen()
+world.setup(width=400, height=400)
+world.setworldcoordinates(0, 0, 400, 400)
+world.bgcolor("#376b53")
+#name your turtle
+tula = turtle.Turtle()
+#draw first black square
+tula.color("black")
+tula.begin_fill()
+tula.setheading(90)
+tula.forward(200)
+tula.right(90)
+tula.forward(200)
+tula.right(90)
+tula.forward(200)
+tula.right(90)
+tula.forward(200)
+tula.end_fill()
+#move turtle to new location
+tula.penup()
+tula.goto(200, 200)
+tula.setheading(90)
+tula.pendown()
+#draw second black square
+tula.begin_fill()
+tula.forward(200)
+tula.right(90)
+tula.forward(200)
+tula.right(90)
+tula.forward(200)
+tula.right(90)
+tula.forward(200)
+tula.right(90)
+tula.end_fill()
