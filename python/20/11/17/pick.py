@@ -11,11 +11,11 @@ def rect(x,y,w,h): # Draw a rect from xy with wh
 	turt.setheading(0) # Set it to the right angle
 	turt.begin_fill() # Start the fill
 	turt.forward(w) # Go the width
-	turt.right(90) # Turn
+	turt.left(90) # Turn
 	turt.forward(h)
-	turt.right(90)
+	turt.left(90)
 	turt.forward(w)
-	turt.right(90)
+	turt.left(90)
 	turt.forward(h)
 	turt.end_fill() # End fill
 

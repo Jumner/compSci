@@ -11,7 +11,7 @@ def rect(x,y,w,h): # Draw a rect from xy with wh
 	t.setheading(0) # Set it to the right angle
 	t.begin_fill() # Start the fill
 	t.forward(w) # Go the width
-	t.setheading(90) # Turn
+	t.setheading(90) # Setting it instead of turning did not fix 😿
 	t.forward(h)
 	t.setheading(180)
 	t.forward(w)
