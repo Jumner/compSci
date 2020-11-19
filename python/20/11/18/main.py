@@ -29,8 +29,7 @@ print(t) # Adds strings
 # print(number + 5) # 'number' is not defined
 # print(time().)
 
-# year_of_birth = int(input("Please enter your year of birth"))
-year_of_birth = 2004
+year_of_birth = int(input("Please enter your year of birth"))
 print(date.today().year - year_of_birth)
 
 r = 5
@@ -63,7 +62,7 @@ while True: # What are you gonna do abt it? 😁
 	except ValueError:
 		print("Please enter an ingeger value such as 3 or 8")
 	else:
-		break
+		break # Just making sure I Never forget this
 
 conversion_factor = 2.54
 cm = int(input("Please enter the number of cm to convert to inches"))
@@ -87,4 +86,48 @@ numDif = numberOne - numberTwo
 numMul = numberOne * numberTwo
 numAvg = mean([numberOne, numberTwo]) # Avg numbers using numpy :)
 numMax = max(numberOne, numberTwo) # Max of numbers using max function
-print(numAvg)
+
+number = int(input("Enter and integer"))
+remainder = number % 2
+print(f'{number} has a remainder of {remainder} when divided by 2')
+remainder = number % 5
+print(f'{number} has a remainder of {remainder} when divided by 5')
+remainder = number % 10
+print(f'{number} has a remainder of {remainder} when divided by 10')
+
+w = float(input("Enter the width of the rectangle"))
+l = float(input("Enter the length of the rectangle"))
+a = w*l
+print(f'The area of the rectangle is {a}')
+
+n=5
+s="Hello"
+t="World"
+
+print(s+t)
+print(s*n)
+print('-'*20)
+print('|'+'A'*18+'|')
+
+x = 3 # Change the size later
+y = 3
+r1 = "+--"*x+"+"
+r2 = "|  "*x+"|"
+outStr = (f'{r1}\n{r2}\n'*y+r1)
+print(outStr)
+
+# The len function of a string returns an int of how many chars are in a string
+# In this case, len("Aaron") would be 5
+
+name = input("Please enter your name") # We already got the name in firstName but whatever
+nameLength = len(name)
+padding = f'+{"-"*nameLength}+'
+print(f'{padding}\n|{name}|\n{padding}')
+
+# Why do I find this fun?
+
+x = 10 # Hell yeah make it real big
+y = 5
+r1 = f'+{"-"*nameLength}'*x+"+"
+r2 = f'|{name}'*x+"|"
+print(f'{r1}\n{r2}\n'*y+r1)
