@@ -120,14 +120,13 @@ print(outStr)
 # In this case, len("Aaron") would be 5
 
 name = input("Please enter your name") # We already got the name in firstName but whatever
-nameLength = len(name)
-padding = f'+{"-"*nameLength}+'
+padding = f'+{"-"*len(name)}+'
 print(f'{padding}\n|{name}|\n{padding}')
 
 # Why do I find this fun?
 
 x = 10 # Hell yeah make it real big
 y = 5
-r1 = f'+{"-"*nameLength}'*x+"+"
+r1 = f'+{"-"*len(name)}'*x+"+"
 r2 = f'|{name}'*x+"|"
 print(f'{r1}\n{r2}\n'*y+r1)
