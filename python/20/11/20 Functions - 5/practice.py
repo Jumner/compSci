@@ -37,3 +37,28 @@ if is_even(user_num):
 else:
 	print(f'{user_num} is odd')
 
+def calculate_tax(price):
+	return price*0.13
+user_price = 109.99
+
+print(f'Wow this costed {user_price}$ with {calculate_tax(user_price)}$ of tax')
+
+def formatName(name):
+	s = '*'*(len(name)+2) + '\n'
+	s += f'*{name}*\n'
+	s += '*'*(len(name)+2) + '\n'
+	return s
+
+print(formatName("Justin"))
+
+def clear_screen():
+	print("\n"*25)
+
+clear_screen()
+
+def is_leap_year(year):
+	return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+
+print(is_leap_year(2000)) # True
+print(is_leap_year(2004)) # True
+print(is_leap_year(2100)) # False
