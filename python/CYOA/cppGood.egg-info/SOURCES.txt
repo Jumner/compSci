@@ -4,5 +4,9 @@ cppGood.egg-info/PKG-INFO
 cppGood.egg-info/SOURCES.txt
 cppGood.egg-info/dependency_links.txt
 cppGood.egg-info/top_level.txt
+include/choice.hpp
 include/include.hpp
+include/readGameFile.hpp
+src/choice.cpp
 src/main.cpp
+src/readGameFile.cpp

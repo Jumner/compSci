@@ -1,7 +1,22 @@
 #include "include.hpp"
 
 #include <string>
+#include <vector>
 #include <iostream>
+
+static PyObject* readFilePy(PyObject* self, PyObject* args) {
+	const char* path;
+	if(!PyArg_ParseTuple(args, "s", &path)) return 0;
+	std::vector<std::string> lines = readFile(path);	
+	std::string key = "(";
+	for (std::string line: lines) {
+		key += "s";
+	}
+	key += ")";
+	choice test(lines[0]);
+	return Py_BuildValue("s", test.name.c_str());
+	// return Py_BuildValue(key.c_str(), lines);
+}
 
 static PyObject* testFunc(PyObject* self, PyObject* args)
 {
@@ -9,12 +24,13 @@ static PyObject* testFunc(PyObject* self, PyObject* args)
 
 	if (!PyArg_ParseTuple(args, "i", &param))
 		return nullptr;
-
-	return Py_BuildValue("i", param+1);
+	std::cout << readFile("game/test.cyoa")[0] << std::endl;
+	return Py_BuildValue("(ii)", param, param+1); // (ii) for a tuple of ints
 }
 
 PyMethodDef cppMethods[] = {
 	{"pyName", (PyCFunction)testFunc, METH_VARARGS, 0},
+	{"readFile", (PyCFunction)readFilePy, METH_VARARGS, 0},
 	{0,0,0,0} // Ngl I got no clue what this does
 };
 
