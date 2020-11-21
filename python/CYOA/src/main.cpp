@@ -1,4 +1,4 @@
-#include "Python.h"
+#include "include.hpp"
 
 #include <string>
 #include <iostream>
@@ -31,6 +31,7 @@ PyMODINIT_FUNC PyInit_cppGood(void) {
 	if (m == nullptr) { // Make sure it worked
 		return NULL; // Yikes if this happens 😬
 	}
-	std::cout << "cppGoodPythonBad" << std::endl << std::endl; // Tee hee
+	std::cout << "cppGoodPythonBad" << std::endl; // Tee hee
+	std::cout << "Wait did I really get it working?" << std::endl; // Hell yea I did! 🥴
 	return m;
 }

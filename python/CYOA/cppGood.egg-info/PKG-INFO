@@ -1,8 +1,8 @@
 Metadata-Version: 1.0
 Name: cppGood
 Version: 0.0.0
-Summary: UNKNOWN
-Home-page: UNKNOWN
+Summary: A library for choose your own adventure games
+Home-page: https://github.com/Jumner/compSci/tree/main/python/CYOA
 Author: UNKNOWN
 Author-email: UNKNOWN
 License: UNKNOWN

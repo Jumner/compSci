@@ -1,6 +1,8 @@
+MANIFEST.in
 setup.py
 cppGood.egg-info/PKG-INFO
 cppGood.egg-info/SOURCES.txt
 cppGood.egg-info/dependency_links.txt
 cppGood.egg-info/top_level.txt
+include/include.hpp
 src/main.cpp

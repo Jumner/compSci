@@ -1,22 +1,13 @@
 # /usr/bin/g++ -g src/*.cpp -I include -o main
 
 #cleanup old file
-rm main
-rm main.o
-rm cppGood_d.pyd
+sudo rm -r build
+sudo rm -r cppGood.egg-info
+sudo rm -r dist
 
 echo compiling
 
-#compiler options
-
-INCDIR="include"
-SRCDIR="src"
-
-OUTPUT="main"
-
-
-# g++ -o $OUTPUT -I $INCDIR src/*.cpp $CFLAGS
-python3 setup.py build
+# python3 setup.py build
 sudo python3 setup.py install
 
 echo "\n\nPROGRAM\n"
