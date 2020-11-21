@@ -5,14 +5,12 @@
 
 static PyObject* testFunc(PyObject* self, PyObject* args)
 {
-	PyObject* param = nullptr; // Not even the nullptr can save me 😿
-
+	int param; // I actually have permanent brain damage. No joke
 
 	if (!PyArg_ParseTuple(args, "i", &param))
-		return nullptr; // Nor can this one
+		return nullptr;
 
-	return Py_BuildValue("s", "Bruh segmentation error my ass");
-	// One the bright side it takes an int and returns a string
+	return Py_BuildValue("i", param+1);
 }
 
 PyMethodDef cppMethods[] = {
@@ -33,5 +31,6 @@ PyMODINIT_FUNC PyInit_cppGood(void) {
 	if (m == nullptr) { // Make sure it worked
 		return NULL; // Yikes if this happens 😬
 	}
+	std::cout << "cppGoodPythonBad" << std::endl << std::endl; // Tee hee
 	return m;
 }
