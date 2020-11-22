@@ -34,11 +34,15 @@ choice::choice(std::string strData) {
 	std::cout << "choice constructor: " << name << std::endl;
 	std::string data = substr(strData, strData.find('['), strData.find_last_of(']'), true);
 
-	imgDir = substr(data, data.find(", img:\"")+6, data.find_last_of("\""), true);
-	
+	size_t imgDirPos = data.find(", img:\"");
+	imgDirPos = imgDirPos == std::string::npos ? 0 : imgDirPos; // Set to 0 if find fails
+	imgDir = substr(data, imgDirPos+6, data.find_last_of("\""), true);
+	imgDir = imgDirPos == 0 ? "" : imgDir;
+	std::cout << "imgDir: " << imgDir << std::endl;	
 	text = substr(data, data.find("\""), data.find("\"", 1), true);
 
-	std::string remainder = substr(data, data.find("\", ")+3, data.find(", img:\""));
+	std::string remainder = substr(data, data.find("\", ")+3, imgDirPos);
+	std::cout << "Remainder: " << remainder << std::endl;
 	std::cout << remainder << std::endl;
 	std::vector<std::string> vec = split(remainder, ", ");	
 	for (std::string s: vec) {
