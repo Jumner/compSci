@@ -8,13 +8,16 @@ static PyObject* readFilePy(PyObject* self, PyObject* args) {
 	const char* path;
 	if(!PyArg_ParseTuple(args, "s", &path)) return 0;
 	std::vector<std::string> lines = readFile(path);	
-	choice test(lines[0]);
-	choice test2(lines[1]);
-	choice test3(lines[2]);
-	test.print();
-	test2.print();
-	test3.print();
-	return Py_BuildValue("s", test.name.c_str());
+	std::vector<choice> choices = {};
+	for(std::string line: lines) {
+		if (line.find("\", ") == std::string::npos) line.replace(line.find("\"]"), 3, "\", ]");
+		// Fix an issue with remainder when there is only text
+		choices.push_back(choice(line));
+	}
+	for(choice c: choices) {
+		c.print();
+	}
+	return Py_BuildValue("s", "hey! It worked, I think");
 	// return Py_BuildValue(key.c_str(), lines);
 }
 

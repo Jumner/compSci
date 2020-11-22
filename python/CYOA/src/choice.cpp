@@ -38,8 +38,9 @@ choice::choice(std::string strData) {
 
 	name = substr(strData, startPos, strData.find('[')); // The name of the choice
 
+	std::cout << "Choice constructor: " << name << std::endl;
 	data = substr(strData, strData.find('['), strData.find_last_of(']'), true);
-
+	
 	imgDirPos = data.find(", img:\"");
 	imgDirPos = imgDirPos == std::string::npos ? 0 : imgDirPos; // Set to 0 if find fails
 
@@ -57,7 +58,7 @@ choice::choice(std::string strData) {
 }
 
 choice::~choice() {
-	std::cout << "choice destructor: " << name << std::endl;
+	std::cout << "Choice destructor: " << name << std::endl;
 }
 
 void choice::print() {
