@@ -6,6 +6,7 @@
 #include "include.hpp"
 
 // readGameFile.cpp
+
 std::vector<std::string> readFile(std::string path) {
 	// Read contents of file into string array
 	std::vector<std::string> lines;

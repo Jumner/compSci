@@ -6,20 +6,45 @@
 
 // choice.cpp
 
-std::string substr(std::string text, int start, int end) {
-	return text.substr(start, end-start);
+std::string substr(std::string text, int start, int end, bool exclusive=false) {
+	return text.substr(start+exclusive, (end-start)-exclusive);
 }
 
-choice::choice(std::string text) {
+std::vector<std::string> split(std::string text, std::string pattern) {
+	std::vector<std::string> stringVec = {};
+	
+	size_t pos = text.find(pattern);
+	std::string token;
+	while((pos = text.find(pattern)) != std::string::npos) {
+		token = text.substr(0, pos);
+		stringVec.push_back(token);
+		text.erase(0, pos+pattern.length());
+	}
+	stringVec.push_back(text.substr(text.find(pattern)+1));
+
+	return stringVec;
+}
+choice::choice(std::string strData) {
 	//choice constructor
-  std::size_t startPos = text.find('\t'); // Last tab character
+  std::size_t startPos = strData.find('\t'); // Last tab character
 	startPos = startPos == std::string::npos ? 0 : startPos; // If there is no tab set to 0
 
-	name = substr(text, startPos, text.find('['));
+	name = substr(strData, startPos, strData.find('['));
 
 	std::cout << "choice constructor: " << name << std::endl;
+	std::string data = substr(strData, strData.find('['), strData.find_last_of(']'), true);
+
+	imgDir = substr(data, data.find(", img:\"")+6, data.find_last_of("\""), true);
 	
-	std::cout << text << std::endl;
+	text = substr(data, data.find("\""), data.find("\"", 1), true);
+
+	std::string remainder = substr(data, data.find("\", ")+3, data.find(", img:\""));
+	std::cout << remainder << std::endl;
+	std::vector<std::string> vec = split(remainder, ", ");	
+	for (std::string s: vec) {
+		std::cout << "s: " << substr(s, s.find('\"'), s.find_last_of('\"'), true) << std::endl;
+		opts.push_back(substr(s, s.find('\"'), s.find_last_of('\"'), true));
+	}
 }
 
 choice::~choice() {

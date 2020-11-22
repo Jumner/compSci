@@ -5,7 +5,7 @@
 
 // choice.hpp
 
-std::string substr(std::string text, int start, int end);
+std::string substr(std::string text, int start, int end, bool exclusive);
 
 class choice { // Class that contains the data for a given choice
 	std::string imgDir;
