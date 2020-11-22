@@ -10,6 +10,7 @@ echo compiling
 # python3 setup.py build
 sudo python3 setup.py install
 
-echo "\n\nPROGRAM\n"
+echo "\n"
+# echo "\n\nPROGRAM\n"
 
 python3 python/main.py

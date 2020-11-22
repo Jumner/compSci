@@ -64,14 +64,14 @@ choice::~choice() {
 
 void choice::print(std::string prefix) {
 	// Print a choice for debugging
-	std::cout << prefix << "Name:        " << name << std::endl;
-	std::cout << prefix << "DisplayText: " << text << std::endl;
-	if (imgDir != "") std::cout << prefix << "imgDir:      " << imgDir << std::endl;
+	std::cout << prefix << "\033[35;1mName:        \033[0m" << name << std::endl;
+	std::cout << prefix << "\033[35;1mDisplayText: \033[0m" << text << std::endl;
+	if (imgDir != "") std::cout << prefix << "\033[35;1mimgDir:      \033[0m" << imgDir << std::endl;
 	for (std::string s: opts) {
-		std::cout << prefix << "Opt:         " << s << std::endl;
+		std::cout << prefix << "\033[35;1mOpt:         \033[0m" << s << std::endl;
 	}
 	for(choice child: children) {
-		std::cout << std::endl << prefix << "Child of:    " << name << std::endl;
+		std::cout << std::endl << prefix << "\033[35;1mChild of:    \033[0m" << name << std::endl;
 		child.print(prefix + "  ");
 	}
 	std::cout << std::endl;

@@ -73,7 +73,7 @@ PyMODINIT_FUNC PyInit_cppGood(void) {
 	if (m == nullptr) { // Make sure it worked
 		return NULL; // Yikes if this happens 😬
 	}
-	std::cout << "cppGoodPythonBad" << std::endl; // Tee hee
-	std::cout << "Wait did I really get it working?" << std::endl; // Hell yea I did! 🥴
+	// std::cout << "\033[96;40mHello\033[0m" << std::endl;
+	std::cout << "\033[96;1mcppGoodPythonBad\033[0m" << std::endl << std::endl; // Tee hee
 	return m;
 }

@@ -49,5 +49,5 @@
   "cSpell.words": [
     "Blit"
   ],
-  "python.pythonPath": ""
+  "python.pythonPath": "/usr/bin/python3",
 }
