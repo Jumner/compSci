@@ -17,4 +17,6 @@ class choice { // Class that contains the data for a given choice
 
 		choice(std::string text);
 		~choice();
+
+		void print();
 };

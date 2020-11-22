@@ -8,12 +8,12 @@ static PyObject* readFilePy(PyObject* self, PyObject* args) {
 	const char* path;
 	if(!PyArg_ParseTuple(args, "s", &path)) return 0;
 	std::vector<std::string> lines = readFile(path);	
-	std::string key = "(";
-	for (std::string line: lines) {
-		key += "s";
-	}
-	key += ")";
 	choice test(lines[0]);
+	choice test2(lines[1]);
+	choice test3(lines[2]);
+	test.print();
+	test2.print();
+	test3.print();
 	return Py_BuildValue("s", test.name.c_str());
 	// return Py_BuildValue(key.c_str(), lines);
 }

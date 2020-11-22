@@ -12,7 +12,7 @@ std::string substr(std::string text, int start, int end, bool exclusive=false) {
 
 std::vector<std::string> split(std::string text, std::string pattern) {
 	std::vector<std::string> stringVec = {};
-	
+	if (text == "") return stringVec;
 	size_t pos = text.find(pattern);
 	std::string token;
 	while((pos = text.find(pattern)) != std::string::npos) {
@@ -26,31 +26,48 @@ std::vector<std::string> split(std::string text, std::string pattern) {
 }
 choice::choice(std::string strData) {
 	//choice constructor
-  std::size_t startPos = strData.find('\t'); // Last tab character
-	startPos = startPos == std::string::npos ? 0 : startPos; // If there is no tab set to 0
+	size_t startPos; // The pos of the last tab char
+	std::string data; // Contains text, options and img of the choice
+	size_t imgDirPos; // Contains the location of the image directory in the string
+	std::string remainder; // Data without the text and img
+	std::vector<std::string> optVec; // Contains the options
+	// Later this will be an options vector with recursion and stuff
 
-	name = substr(strData, startPos, strData.find('['));
+	startPos = strData.find_last_of("\t"); // Last tab character
+	startPos = startPos == std::string::npos ? 0 : startPos+1; // If there is no tab set to 0
 
-	std::cout << "choice constructor: " << name << std::endl;
-	std::string data = substr(strData, strData.find('['), strData.find_last_of(']'), true);
+	name = substr(strData, startPos, strData.find('[')); // The name of the choice
 
-	size_t imgDirPos = data.find(", img:\"");
+	data = substr(strData, strData.find('['), strData.find_last_of(']'), true);
+
+	imgDirPos = data.find(", img:\"");
 	imgDirPos = imgDirPos == std::string::npos ? 0 : imgDirPos; // Set to 0 if find fails
-	imgDir = substr(data, imgDirPos+6, data.find_last_of("\""), true);
-	imgDir = imgDirPos == 0 ? "" : imgDir;
-	std::cout << "imgDir: " << imgDir << std::endl;	
+
+	imgDir = imgDirPos == 0 ? "" : substr(data, imgDirPos+6, data.find_last_of("\""), true);
+
 	text = substr(data, data.find("\""), data.find("\"", 1), true);
 
-	std::string remainder = substr(data, data.find("\", ")+3, imgDirPos);
-	std::cout << "Remainder: " << remainder << std::endl;
-	std::cout << remainder << std::endl;
-	std::vector<std::string> vec = split(remainder, ", ");	
-	for (std::string s: vec) {
-		std::cout << "s: " << substr(s, s.find('\"'), s.find_last_of('\"'), true) << std::endl;
+	remainder = data.substr(data.find("\"", 1)+3);
+	remainder = remainder.length() == imgDir.length()+6 ? "" : remainder.substr(0, remainder.length() - (8 + imgDir.length()));
+
+	optVec = split(remainder, ", ");	
+	for (std::string s: optVec) {
 		opts.push_back(substr(s, s.find('\"'), s.find_last_of('\"'), true));
 	}
 }
 
 choice::~choice() {
 	std::cout << "choice destructor: " << name << std::endl;
+}
+
+void choice::print() {
+	// Print a choice for debugging
+	std::cout << std::endl;
+	std::cout << "Name:        " << name << std::endl;
+	std::cout << "DisplayText: " << text << std::endl;
+	if (imgDir != "") std::cout << "imgDir:      " << imgDir << std::endl;
+	for (std::string s: opts) {
+		std::cout << "Opt:         " << s << std::endl;
+	}
+	std::cout << std::endl;
 }
