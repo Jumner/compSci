@@ -12,11 +12,34 @@ static PyObject* readFilePy(PyObject* self, PyObject* args) {
 	for(std::string line: lines) {
 		if (line.find("\", ") == std::string::npos) line.replace(line.find("\"]"), 3, "\", ]");
 		// Fix an issue with remainder when there is only text
+		// It's a bandaid solution but it will do for now
 		choices.push_back(choice(line));
 	}
-	for(choice c: choices) {
-		c.print();
+
+	while(choices.size() > 1) { // This is the most brute force thing I've ever made 🤢
+		// Repeat until all the elements are sorted into one
+		for(int i = 0; i < choices.size(); i ++) {
+			// Look for a child element with no children
+			if(choices[i].childList.empty()) {
+				// If the element has no children
+				for(int p = 0; p < choices.size(); p ++) {
+					// Look for a parent of the child
+					for(int c = 0; c < choices[p].childList.size(); c ++) {
+						// Look at the child names of the tested parent
+						if(choices[p].childList[c] == choices[i].name) {
+							// If the parent has the name of the child in its childList
+							choices[p].children.push_back(choices[i]); // Put the child into the parents children vec
+							choices.erase(choices.begin()+i); // Remove the child from the choices vec
+							choices[p].childList.erase(choices[p].childList.begin()+c); // Remove the name of the child from the childList of the parent
+						}
+					}
+				}
+			}
+		}
 	}
+
+	choices[0].print();
+
 	return Py_BuildValue("s", "hey! It worked, I think");
 	// return Py_BuildValue(key.c_str(), lines);
 }

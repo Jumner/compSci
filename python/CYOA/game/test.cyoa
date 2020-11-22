@@ -1,4 +1,5 @@
 test["DisplayText", "option 1":op1, "option 2":op2, "option 3":op3, img:"art.png"]
 	op1["Wait", img:"test.png"]
-	op2["rip", "Rip Option :(":hey!]
-	op3["hey"]
+	op2["Hey im op2!", img:"hey.jpg"]
+	op3["wow so cool", "nesting?":nest, img:"bruh.mp4"]
+		nest["Hey nesting worked!", img:"idkbruh"]

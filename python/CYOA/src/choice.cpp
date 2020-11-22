@@ -38,7 +38,7 @@ choice::choice(std::string strData) {
 
 	name = substr(strData, startPos, strData.find('[')); // The name of the choice
 
-	std::cout << "Choice constructor: " << name << std::endl;
+	// std::cout << "Choice constructor: " << name << std::endl;
 	data = substr(strData, strData.find('['), strData.find_last_of(']'), true);
 	
 	imgDirPos = data.find(", img:\"");
@@ -54,21 +54,25 @@ choice::choice(std::string strData) {
 	optVec = split(remainder, ", ");	
 	for (std::string s: optVec) {
 		opts.push_back(substr(s, s.find('\"'), s.find_last_of('\"'), true));
+		childList.push_back(s.substr(s.find("\":")+2));
 	}
 }
 
 choice::~choice() {
-	std::cout << "Choice destructor: " << name << std::endl;
+	// std::cout << "Choice destructor: " << name << std::endl;
 }
 
-void choice::print() {
+void choice::print(std::string prefix) {
 	// Print a choice for debugging
-	std::cout << std::endl;
-	std::cout << "Name:        " << name << std::endl;
-	std::cout << "DisplayText: " << text << std::endl;
-	if (imgDir != "") std::cout << "imgDir:      " << imgDir << std::endl;
+	std::cout << prefix << "Name:        " << name << std::endl;
+	std::cout << prefix << "DisplayText: " << text << std::endl;
+	if (imgDir != "") std::cout << prefix << "imgDir:      " << imgDir << std::endl;
 	for (std::string s: opts) {
-		std::cout << "Opt:         " << s << std::endl;
+		std::cout << prefix << "Opt:         " << s << std::endl;
+	}
+	for(choice child: children) {
+		std::cout << std::endl << prefix << "Child of:    " << name << std::endl;
+		child.print(prefix + "  ");
 	}
 	std::cout << std::endl;
 }
