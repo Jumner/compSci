@@ -55,6 +55,6 @@ for i in range(iterations): # How many pixels each turtle should travel
 	turtles = list(map(doMove,turtles,out.get()))
 
 	world.title(f'{100*(i+1)/iterations}% Done') # And set the title
-turtle.update() # Unindent this for speed, indent for satifcaction
+	turtle.update() # Unindent this for speed, indent for satifcaction
 
 input("done") # Wait to not lose the beautiful image

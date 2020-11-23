@@ -4,14 +4,14 @@ from glob import glob
 
 lib = ('cppGood', dict(
 	sources=glob('src/*.cpp'),
-	include_dirs=['include', '/usr/include/python3.9'],
+	include_dirs=['include', '/usr/include/python3.7'],
 	language='c++'
 ))
 
 module = Extension(
 	'cppGood',
 	sources=glob('src/*.cpp'),
-	include_dirs=['include', '/usr/include/python3.9'],
+	include_dirs=['include', '/usr/include/python3.7'],
 	language='c++'
 )
 
