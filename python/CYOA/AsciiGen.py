@@ -1,5 +1,7 @@
 from PIL import Image
 from math import floor
+from random import randint
+from AsciiValGen import getAsciiDict
 
 def downSample(img, dsImg):
 	# Take an input image and an image to down sample
@@ -36,24 +38,68 @@ def downScale(img, dsImg):
 			dsImgPx[x,y] = col
 	return dsImg
 
+def saveHsv(hsvImg, file):
+	hsvImg.convert('RGB').save(file)
+
+def printHsv(hsvImg, ansiTable, asciiDict):
+	hsvImgPx = hsvImg.load()
+	reset = '\033[37;49m'
+	pStr = reset
+	for y in range(hsvImg.height):
+		pStr += reset + '\n'
+		for x in range(hsvImg.width):
+			if hsvImgPx[x,y][1] < 50:
+				ansiChar = '\033[37;1;40m'
+			else:
+				hue = hsvImgPx[x,y][0]
+				ansiChar = ansiTable.get(hue) or ansiTable[min(ansiTable.keys(), key = lambda key: abs(key-hue))]
+			pStr += ansiChar
+
+			value = hsvImgPx[x,y][2]
+			char = asciiDict.get(value) or asciiDict[min(asciiDict.keys(), key = lambda key: abs(key-value))]
+			pStr += char
+	file = open("str.txt", 'w')
+	file.write(pStr+reset)
+	file.close()
+	print(pStr+reset)
+
 img = Image.new('RGB', (1920, 1080), 'red')
 px = img.load()
 for y in range(0, img.height):
 	for x in range(0, img.width):
-		px[x, y] = (x%255, y%32*8, x%64*4)
-		# v = floor(x/img.width*255)
-		# px[x, y] = (v, v, v)
-print("Done img.png")
+		px[x, y] = (x%255, y%64*4, x%128*2)
 img.save('img.png')
 
-# img = Image.open('red.png')
+img = Image.open('1kx100x3.png')
+ar = img.height/img.width
 
-newW = 240
-newH = 135
+newW = 64
+newH = round(ar*newW/2)
+print(newH) # 18 / 36
 dsImg = Image.new('RGB', (newW, newH))
-dsImg = downSample(img, dsImg)
-print("Done imgDSample.png")
-dsImg.save('imgDSample.png')
 dsImg = downScale(img, dsImg)
-print("Done imgDScale.png")
 dsImg.save('imgDScale.png')
+
+hsvImg = dsImg.convert('HSV')
+
+g = '\033[32;40m'
+r = '\033[37;49m'
+
+ansiTable = {
+	0:'\033[31;1;40m',
+	255:'\033[31;1;40m',
+	120:'\033[32;1;40m',
+	60:'\033[33;1;40m',
+	240:'\033[34;1;40m',
+	300:'\033[35;1;40m',
+	180:'\033[36;1;40m',
+}
+
+asciiDict = getAsciiDict(1024)
+printHsv(hsvImg, ansiTable, asciiDict)
+
+
+print(min(asciiDict))
+print(max(asciiDict))
+
+saveHsv(hsvImg, 'hsvImg.png')
