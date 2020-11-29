@@ -1,5 +1,4 @@
 from PIL import ImageFont, ImageDraw, Image
-from random import random
 # To determine the value of chars
 import unicodedata
 
@@ -17,13 +16,13 @@ def getAsciiDict(charNum):
 	for char in chars:
 		draw.text((0,0), char, font=font)
 		imgPx = img.load()
-		black = 0
+		bright = 0
 		for y in range(img.height):
 			for x in range(img.width):
 				# black += imgPx[x,y] == (0,0,0)
-				black += imgPx[x,y][0]/255
+				bright += imgPx[x,y][0]/255
 				imgPx[x,y] = (0,0,0)
-		value = 255*black/area
+		value = bright/area
 		asciiDict[value] = char
 	
 	# Post processing

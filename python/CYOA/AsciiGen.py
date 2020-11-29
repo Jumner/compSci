@@ -1,6 +1,6 @@
 from PIL import Image
 from math import floor
-from random import randint
+from random import randint, random
 from AsciiValGen import getAsciiDict
 
 def downSample(img, dsImg):
@@ -55,7 +55,7 @@ def printHsv(hsvImg, ansiTable, asciiDict):
 				ansiChar = ansiTable.get(hue) or ansiTable[min(ansiTable.keys(), key = lambda key: abs(key-hue))]
 			pStr += ansiChar
 
-			value = hsvImgPx[x,y][2]
+			value = hsvImgPx[x,y][2] * (0.9+random()*0.1)
 			char = asciiDict.get(value) or asciiDict[min(asciiDict.keys(), key = lambda key: abs(key-value))]
 			pStr += char
 	file = open("str.txt", 'w')
@@ -70,10 +70,10 @@ for y in range(0, img.height):
 		px[x, y] = (x%255, y%64*4, x%128*2)
 img.save('img.png')
 
-img = Image.open('1kx100x3.png')
+img = Image.open('1kx100x3.png') # 1kx100x3.png sunrise.jpeg img.png
 ar = img.height/img.width
 
-newW = 64
+newW = 128
 newH = round(ar*newW/2)
 print(newH) # 18 / 36
 dsImg = Image.new('RGB', (newW, newH))
@@ -87,15 +87,15 @@ r = '\033[37;49m'
 
 ansiTable = {
 	0:'\033[31;1;40m',
-	255:'\033[31;1;40m',
-	120:'\033[32;1;40m',
-	60:'\033[33;1;40m',
-	240:'\033[34;1;40m',
-	300:'\033[35;1;40m',
-	180:'\033[36;1;40m',
+	42.5:'\033[33;1;40m',
+	85:'\033[32;1;40m',
+	127.5:'\033[36;1;40m',
+	170:'\033[34;1;40m',
+	212.5:'\033[35;1;40m',
+	255:'\033[31;1;40m'
 }
 
-asciiDict = getAsciiDict(1024)
+asciiDict = getAsciiDict(128)
 printHsv(hsvImg, ansiTable, asciiDict)
 
 
