@@ -1,105 +1,57 @@
 from PIL import Image
 from math import floor
 from random import randint, random
-from AsciiValGen import getAsciiDict
+from collections import OrderedDict
+from bisect import bisect_left
 
-def downSample(img, dsImg):
-	# Take an input image and an image to down sample
-	imgSF = [1/img.width, 1/img.height]
-	dsImgSF = [1/dsImg.width, 1/dsImg.height]
-	SF = [d / f for d, f in zip(dsImgSF, imgSF)]
-	imgPx = img.load()
-	dsImgPx = dsImg.load()
-	for y in range(0, dsImg.height):
-		for x in range(0, dsImg.width):
-			imgX = floor(x * SF[0])
-			imgY = floor(y * SF[1])
-			dsImgPx[x,y] = imgPx[imgX, imgY]
-	return dsImg
+from AsciiValGen import getAsciiDict, getAnsiDict, closest
+from ds import downScale
 
-def downScale(img, dsImg):
-	# Take an input image and an image to down scale
-	imgSF = [1/img.width, 1/img.height]
-	dsImgSF = [1/dsImg.width, 1/dsImg.height]
-	SF = [d / f for d, f in zip(dsImgSF, imgSF)]
-	imgPx = img.load()
-	dsImgPx = dsImg.load()
-	for x in range(0, dsImg.width):
-		for y in range(0, dsImg.height):
-			lx = floor(x * SF[0])
-			ux = floor((x+1) * SF[0])
-			ly = floor(y * SF[1])
-			uy = floor((y+1) * SF[1])
-			col = (0,0,0)
-			for ix in range(lx, ux):
-				for iy in range(ly, uy):
-					col = tuple(map(lambda c,i: c + i, col, imgPx[ix, iy]))
-			col = tuple(map(lambda c: floor(c/((ux-lx)*(uy-ly))), col))
-			dsImgPx[x,y] = col
-	return dsImg
-
-def saveHsv(hsvImg, file):
-	hsvImg.convert('RGB').save(file)
-
-def printHsv(hsvImg, ansiTable, asciiDict):
+def printHsv(hsvImg, ansiDict, asciiDict):
 	hsvImgPx = hsvImg.load()
-	reset = '\033[37;49m'
-	pStr = reset
-	for y in range(hsvImg.height):
-		pStr += reset + '\n'
-		for x in range(hsvImg.width):
-			if hsvImgPx[x,y][1] < 50:
-				ansiChar = '\033[37;1;40m'
-			else:
-				hue = hsvImgPx[x,y][0]
-				ansiChar = ansiTable.get(hue) or ansiTable[min(ansiTable.keys(), key = lambda key: abs(key-hue))]
-			pStr += ansiChar
+	reset = '\033[37;49m' # Console reset escape sequence
+	pStr = "" # Start it with a reset char
+	
+	asciiKeys = list(asciiDict.keys())
+	ansiKeys = list(ansiDict.keys())
 
-			value = hsvImgPx[x,y][2] * (0.9+random()*0.1)
-			char = asciiDict.get(value) or asciiDict[min(asciiDict.keys(), key = lambda key: abs(key-value))]
+	for y in range(hsvImg.height):
+		if pStr: # Only reset and \n after a line
+			pStr += reset + '\n'
+		for x in range(hsvImg.width):
+			if hsvImgPx[x,y][1] < 50: # If pixel is unsaturated
+				ansiSeq = '\033[37;1;40m' # White
+			else: # Pixel is saturated
+				hue = hsvImgPx[x,y][0] * (0.9+random()*0.1) # Make it a bit random
+				ansiSeq = closest(ansiDict, hue, ansiKeys) # Grab the closest color to the hue
+			pStr += ansiSeq
+
+			value = hsvImgPx[x,y][2] * (0.9+random()*0.1) # Make it a bit random so its not uniform
+			char = closest(asciiDict, value, asciiKeys) # Grab the closest char to brightness value
 			pStr += char
 	file = open("str.txt", 'w')
-	file.write(pStr+reset)
+	file.write(pStr+reset) # Put it into a file for copy pasting
 	file.close()
 	print(pStr+reset)
 
-img = Image.new('RGB', (1920, 1080), 'red')
-px = img.load()
-for y in range(0, img.height):
-	for x in range(0, img.width):
-		px[x, y] = (x%255, y%64*4, x%128*2)
-img.save('img.png')
+def printImg(img, width=196, charNum=2048):
+	asciiDict = getAsciiDict(charNum) # Grab the dictionaries
+	ansiDict = getAnsiDict()
+
+	dsImg = downScale(img, width) # Downscale to image
+	
+	hsvImg = dsImg.convert('HSV')
+	
+	printHsv(hsvImg, ansiDict, asciiDict) # Print it!
+
+# img = Image.new('RGB', (1920, 1080), 'red')
+# px = img.load()
+# for y in range(0, img.height):
+# 	for x in range(0, img.width):
+# 		px[x, y] = (2*(x%128), x%256, floor(0.5*(x%512)))
+# img.save('img.png')
 
 img = Image.open('1kx100x3.png') # 1kx100x3.png sunrise.jpeg img.png
-ar = img.height/img.width
+print("Img opened")
 
-newW = 128
-newH = round(ar*newW/2)
-print(newH) # 18 / 36
-dsImg = Image.new('RGB', (newW, newH))
-dsImg = downScale(img, dsImg)
-dsImg.save('imgDScale.png')
-
-hsvImg = dsImg.convert('HSV')
-
-g = '\033[32;40m'
-r = '\033[37;49m'
-
-ansiTable = {
-	0:'\033[31;1;40m',
-	42.5:'\033[33;1;40m',
-	85:'\033[32;1;40m',
-	127.5:'\033[36;1;40m',
-	170:'\033[34;1;40m',
-	212.5:'\033[35;1;40m',
-	255:'\033[31;1;40m'
-}
-
-asciiDict = getAsciiDict(128)
-printHsv(hsvImg, ansiTable, asciiDict)
-
-
-print(min(asciiDict))
-print(max(asciiDict))
-
-saveHsv(hsvImg, 'hsvImg.png')
+printImg(img)
