@@ -12,14 +12,14 @@ def printHsv(hsvImg, ansiDict, asciiDict):
 	reset = '\033[37;49m' # Console reset escape sequence
 	pStr = "" # Start it with a reset char
 	
-	asciiKeys = list(asciiDict.keys())
+	asciiKeys = list(asciiDict.keys()) # Needed for binary search
 	ansiKeys = list(ansiDict.keys())
 
 	for y in range(hsvImg.height):
 		if pStr: # Only reset and \n after a line
 			pStr += reset + '\n'
 		for x in range(hsvImg.width):
-			if hsvImgPx[x,y][1] < 50: # If pixel is unsaturated
+			if hsvImgPx[x,y][1] < 100: # If pixel is unsaturated
 				ansiSeq = '\033[37;1;40m' # White
 			else: # Pixel is saturated
 				hue = hsvImgPx[x,y][0] * (0.9+random()*0.1) # Make it a bit random
@@ -29,10 +29,11 @@ def printHsv(hsvImg, ansiDict, asciiDict):
 			value = hsvImgPx[x,y][2] * (0.9+random()*0.1) # Make it a bit random so its not uniform
 			char = closest(asciiDict, value, asciiKeys) # Grab the closest char to brightness value
 			pStr += char
+	pStr += reset
 	file = open("str.txt", 'w')
-	file.write(pStr+reset) # Put it into a file for copy pasting
+	file.write(pStr) # Put it into a file for copy pasting
 	file.close()
-	print(pStr+reset)
+	print(pStr)
 
 def printImg(img, width=196, charNum=2048):
 	asciiDict = getAsciiDict(charNum) # Grab the dictionaries
@@ -51,7 +52,7 @@ def printImg(img, width=196, charNum=2048):
 # 		px[x, y] = (2*(x%128), x%256, floor(0.5*(x%512)))
 # img.save('img.png')
 
-img = Image.open('1kx100x3.png') # 1kx100x3.png sunrise.jpeg img.png
+img = Image.open('img.png') # 1kx100x3.png sunrise.jpeg img.png
 print("Img opened")
 
 printImg(img)

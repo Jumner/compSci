@@ -47,8 +47,8 @@ def getAnsiDict():
 	} # I just don't want to see it tbh 🙃
 	return ansiDict
 
-def closest(dict, key, keyList=-1):
-	if keyList == -1: # Grab the keylist if it was not passed
+def closest(dict, key, keyList=None):
+	if keyList == None: # Grab the keylist if it was not passed
 		# This would be done per pixel so pass it if possible
 		keyList = list(dict.keys())
 
@@ -66,6 +66,6 @@ def closest(dict, key, keyList=-1):
 		lKey = 0
 
 	if abs(hKey-key) > abs(lKey-key): # Which one is closer to the key
-		return dict[hKey]
-	else:
 		return dict[lKey]
+	else:
+		return dict[hKey]
