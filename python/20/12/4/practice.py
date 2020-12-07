@@ -1,127 +1,134 @@
-from random import randint
-# 1
-continue_repeat = "end"
-continue_repeat = "please no"
+from time import sleep
+from math import ceil
+# Example 1
+# 0
+# 10
+# 20
+# 30
+# 40
 
-while continue_repeat == "end":
-  print("Have a good day")
+# Example 2
+# 1. "Hello World!"
+# ..
+# 20. "Hello World!"
 
-# 2-3
-user_input = "more"
-count = 0
+# Example 3
+# 0 - 0: The Matrix
+# ..
+# 0 - 4: The Matrix
+# ..
+# 9 - 4: The Matrix
 
-while user_input == "more":
-	count += 1
-	print ("Have a good day.")
-	user_input = input("Type more to continue")
-     
-print (f'Done, looped {count} times')
+# Example 4
+# 10
+# 18
+# 24
+# 28
+# 30
+# 30
+# 28
+# 24
+# 18
+# 10
+
+# Example 5
+# 604800
+
+# 2
+
+for i in range(5,1000,5):
+    # print(i)
+		pass
+
+# 3
+
+def print_times_table(table_number):
+	for i in range(1, 11):
+		print(f'{i:2} x {table_number} = {i*table_number:4}')
+
+print_times_table(9)
 
 # 4
-total_sum = 0
-number_of_numbers = 0
-while user_input != 0:
-	user_input = eval(input("Enter a number to be added, enter 0 to stop"))
-	total_sum += user_input
-	number_of_numbers = number_of_numbers+1 if user_input != 0 else number_of_numbers
-	print(f'Entered {user_input} for a sum of {total_sum} and an average of {total_sum/number_of_numbers}')
+
+def print_temperature_table():
+	print("Celcius to Fahrenheit Table")
+	print('-'*27)
+	for c in range(-20, 36, 5):
+		f = c * 9/5 + 32
+		print(f'{c:>3} C --> {f:>3.0f} F')
+
+print_temperature_table()
 
 # 5
-count = 0
-stock = 25.23
-while stock < 100:
-	stock*=1.163
-	count += 1
-	print(f'Stock costs ${stock:.2f} after {count} years')
-print(f'Stock surpassed $100 after {count} years')
+
+total = 0
+for num in range(1,101):
+	total += num
+print(total)
 
 # 6
-for i in range(20):
-	print(f'{i+1:>3} X 5 = {(i+1)*5}')
+
+def sum_range_values(low,high):
+	sum = 0
+	for i in range(low,high+1):
+		sum += i
+	return sum
+
+lowEnd = eval(input("Enter the low end of range"))
+highEnd = eval(input("Enter the high end of range"))
+print(sum_range_values(lowEnd, highEnd))
 
 # 7
-total = 0
-count = 0
-while total < 100:
-	count += 1
-	roll = randint(1,6)
-	total += roll
-	print(f'Rolled a {roll} >>> total is {total}')
-print('-'*20)
-print(f'Total number  of rolls {count}')
+
+rangeStr = ""
+for i in range(highEnd, lowEnd-1, -1):
+	rangeStr += f'{i}, '
+print(rangeStr)
 
 # 8
-total = 0
-count = 0
-while total < 100:
-	count += 2
-	roll = randint(1,6)
-	total += roll
-	print(f'Die 1 rolled a {roll} >>> total is {total}')
-	roll = randint(1,6)
-	total += roll
-	print(f'Die 2 rolled a {roll} >>> total is {total}')
-print('-'*20)
-print(f'Total number  of rolls {count}')
+
+for i in range(10, 0, -1):
+	print(f'{i} ...')
+	# sleep(0.5)
 
 # 9
-count = 0
-initRoll = randint(1,6)
-roll = 0
-print(f'Your first roll is {initRoll}')
-while roll != initRoll:
-	count += 1
-	roll = randint(1,6)
-	print(f'Rolled a {roll}')
-print('-'*20)
-print(f'It took {count} rolls to reach your point of {initRoll} again')
+
+def sum_squares(some_num):
+	numSum = 0
+	for i in range(some_num):
+		numSum += (i+1)**2
+	return numSum
+
+print(sum_squares(5))
 
 # 10
-rNum = randint(1,10)
-guess = 0
-print("I have picked a random number between 1 and 10. What is it?")
-while guess != rNum:
-	guess = eval(input("Guess the random number"))
-	if guess > rNum:
-		print(f'{guess} is too high')
-	elif guess < rNum:
-		print(f'{guess} is too low')
-	else:
-		print(f'{guess} is correct! Well done!')
-	
+
+triStr = ""
+for i in range(10):
+	triStr += "$"*(i+1) + "\n"
+
+for i in range(10, 0, -1):
+	triStr += "$"*(i) + "\n"
+
+for i in range(10):
+	triStr += f'{"$"*(i+1):>10}' + "\n"
+
+for i in range(10, 0, -1):
+	triStr += f'{"$"*(i):>10}' + "\n"
+
+print(triStr)
+
+patStr = ""
+
 # 11
-nums = [randint(1,50) for i in range(2)]
-guess = 0
-while guess != sum(nums):
-	guess = eval(input(f'{nums[0]:>3} +{nums[1]:>3} = ???'))
-	if guess != sum(nums):
-		print("Sorry that is incorrect. Try again")
-	else:
-		print(f'You got it right! {nums[0]:>3} +{nums[1]:>3} ={sum(nums):>3}')
 
-# 12 oh yeah im extra
+n = 15
+w = n*2-2
+for i in range(n):
+	print(f'{i+1:>{i+1}}{" ":^{(w+3)-i*2}}{i+1}')
 
-def word_in_word(guess, word):
-	for letter in guess:
-		if letter not in word.lower():
-			return False
-	return True
+num = eval(input("Enter a number"))
 
-point = 0
-word = "happenings"
-guess = word
-correct = []
-
-while True:
-	guess = input("Enter a word you find in happenings")
-	if word_in_word(guess, word):
-		if guess in correct:
-			print(f"You already guessed {guess}. Try again")
-			continue
-		point += len(guess)
-		correct.append(guess)
-		print(f'Congratulations you found a word. Score {point}')
-	else:
-		break
-
-print(f"Sorry {guess} doesn't exist in {word}\nFinal score {point}")
+h = ceil((num)/2) # Why add 1 when we can round up?
+for i in range(h):
+	print(f'{"*"+2*i*"*":^{num}}')

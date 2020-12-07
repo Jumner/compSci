@@ -109,7 +109,7 @@ def doctor():
 		doctor()
 
 def noPatients():
-	print("As you arrive to the center, you do not see any patients. They tell you that there is only one person with Covid-19 in North Korea, and they tell you that there are about to be none.\n")
+	print("\nAs you arrive to the center, you do not see any patients. They tell you that there is only one person with Covid-19 in North Korea, and they tell you that there are about to be none.\n")
 
 def hotel():
 	funcDict = {
