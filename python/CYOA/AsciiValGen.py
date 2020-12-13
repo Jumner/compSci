@@ -5,7 +5,9 @@ from bisect import bisect_left
 import unicodedata
 
 def getAsciiDict(charNum):
-	font = ImageFont.truetype("/usr/share/fonts/truetype/hack/Hack-Regular.ttf")
+	font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf")
+	# /usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf
+	# /usr/share/fonts/truetype/hack/Hack-Regular.ttf
 	charWidth, charHeight = font.getsize(" ") # Always the same
 	area = charWidth * charHeight # area of the font
 	img = Image.new('RGB', (charWidth, charHeight))

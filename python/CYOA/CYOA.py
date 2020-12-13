@@ -4,11 +4,11 @@ def start():
 		"asia": "asia()"
 	}
 	user = input("\nYou are going on vacation!\nWhat continent would you like to travel to?\n(North America, South America, Europe, Asia, Africa, Australia)\n")
-	if user.lower() in funcDict:
-		eval(funcDict[user.lower()])
+	if user.lower() in funcDict: # if input is a key in the dict
+		eval(funcDict[user.lower()]) # run the content at the users key
 	else:
 		print("\nPlease enter one of the values that are in parentheses.")
-		start()
+		start() # recurse if input is not a key in the dict
 
 def na():
 	funcDict = {

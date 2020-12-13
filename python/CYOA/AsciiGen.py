@@ -52,7 +52,7 @@ def printImg(img, width=196, charNum=2048):
 # 		px[x, y] = (2*(x%128), x%256, floor(0.5*(x%512)))
 # img.save('img.png')
 
-img = Image.open('img.png') # 1kx100x3.png sunrise.jpeg img.png
+img = Image.open('profile.jpg') # 1kx100x3.png sunrise.jpeg img.png
 print("Img opened")
 
-printImg(img)
+printImg(img, 64)
