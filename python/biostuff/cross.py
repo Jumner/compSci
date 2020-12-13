@@ -33,6 +33,19 @@ def getHybridCross(gametes):
 						row[x+1] += "".join(sorted(row[0][i] + hybridCross[0][x+1][i])) # Combination of the gametes at that spot
 	return hybridCross
 
+def pheno(geno):
+	phenoList = []
+	for i in range(0,len(geno),2):
+		phenoStr = ""
+		for c in geno[i:i+2]:
+			if not phenoStr:
+				if c.isupper():
+					phenoStr += c
+				else:
+					phenoStr = c
+		phenoList.append(phenoStr)
+	return phenoList
+
 def printCross(genotypes):
 	gametes = [getGamete(genotype) for genotype in genotypes] # Generate gametes for genotypes
 	print(f'\nParent genotypes: {genotypes[0]} x {genotypes[1]}\n')
@@ -65,10 +78,14 @@ def printCross(genotypes):
 
 	phenoDict = {}
 	for key in genoDict:
-		if key[::2] in phenoDict: # First allele in pair
-			phenoDict[key[::2]] += genoDict[key] # Add the old count 
+		# if key[::2] in phenoDict: # First allele in pair
+		# 	phenoDict[key[::2]] += genoDict[key] # Add the old count 
+		# else:
+		# 	phenoDict[key[::2]] = genoDict[key]
+		if "".join(pheno(key)) in phenoDict:
+			phenoDict["".join(pheno(key))] += genoDict[key]
 		else:
-			phenoDict[key[::2]] = genoDict[key]
+			phenoDict["".join(pheno(key))] = genoDict[key]
 	print("\nPhenotype: ")
 	phenoStr = ""
 	for key in phenoDict:
@@ -80,7 +97,7 @@ def printCross(genotypes):
 		phenoStr += f'{frac.numerator}:{frac.denominator} {keyStr},\n'
 	print(phenoStr[:-2]) # Chop trailing commas and newlines
 
-parentGenotypes = ["Aa", "aa"]
+parentGenotypes = ["Aa", "Aa"]
 printCross(parentGenotypes)
 parentGenotypes = ["AaBb", "AaBb"]
 printCross(parentGenotypes)
@@ -90,3 +107,11 @@ parentGenotypes = ["AaBbCcDd", "AaBbCcDd"]
 printCross(parentGenotypes)
 parentGenotypes = ["AaBbCcDdEe", "AaBbCcDdEe"]
 printCross(parentGenotypes)
+
+def split(string):
+	return [(char if char.isupper() else "") for char in string]
+# print("".join(split("LlSD")))
+# print("LlSD"[:2:2])
+
+
+# pheno("LlSD")
